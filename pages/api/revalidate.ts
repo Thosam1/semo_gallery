@@ -1,3 +1,5 @@
+/* This file goal is to automatically update vercel app any time there is a change in the Supabase database -> added security so no unauthorized party can modify database */
+
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
@@ -6,7 +8,7 @@ export default async function handler(
 ) {
   // Check for secret to confirm this is a valid request
   if (req.query.secret !== process.env.REVALIDATE_SECRET) {
-    return res.status(401).json({ message: 'Invalid token' })
+    return res.status(401).json({ message: 'Invalid token' }) // for security reasons
   }
 
   try {
